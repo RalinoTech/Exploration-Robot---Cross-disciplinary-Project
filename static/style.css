@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container,
+.speed-container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-width: 400px;
+    margin: 0 10px;
+    /* Espacement entre les deux conteneurs */
+}
+
+.container {
+    margin-right: 20px;
+    /* Espacement supplémentaire entre les deux conteneurs */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.key {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    font-size: 24px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.speed {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    font-size: 24px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.key-pressed {
+    background-color: #4CAF50;
+    /* Couleur de fond pour les touches enfoncées */
+    color: #fff;
+    /* Couleur du texte pour les touches enfoncées */
+}
