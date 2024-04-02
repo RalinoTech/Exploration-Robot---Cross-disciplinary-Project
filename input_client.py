@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import socket
-#import serial
+import serial
 import sys
 
 def main():
@@ -14,7 +14,7 @@ def main():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((ip.strip(), int(port)))
 
-    #ser = serial.Serial(port="/dev/serial0", baudrate=19200)
+    ser = serial.Serial(port="/dev/serial0", baudrate=19200)
 
     order = None
 
@@ -31,8 +31,7 @@ def main():
         if data != b"":
             order = int.from_bytes(data, 'little')
             if order == 4: exit()
-            print(order)
-            #ser.write(str(order).encode("utf-8"))
+            ser.write(str(order).encode("utf-8"))
     client.close()
 
 
