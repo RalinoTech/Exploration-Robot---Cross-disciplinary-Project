@@ -17,13 +17,13 @@ class Server:
 
     def send_input(self, key):
 
-        if key == "up":
+        if key == "z":
             order = 0
-        elif key == "down":
+        elif key == "s":
             order = 1
-        elif key == "right":
+        elif key == "d":
             order = 2
-        elif key == "left":
+        elif key == "q":
             order = 3
         elif key == "esc":
             order = 4
