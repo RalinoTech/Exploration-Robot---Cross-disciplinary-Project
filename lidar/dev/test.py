@@ -8,7 +8,7 @@ import matplotlib.animation as animation
 PORT_NAME = 'COM9'
 DMAX = 4000
 IMIN = 0
-IMAX = 50
+IMAX = 500
 
 def update_line(num, iterator, line):
     scan = next(iterator)
@@ -30,24 +30,26 @@ def affichage_comprehension(iterator,line):
      #   print(meas[0])
 
 def run():
-    lidar = RPLidar(PORT_NAME)
-    fig = plt.figure()
-    ax = plt.subplot(111, projection='polar')
-    line = ax.scatter([0, 0], [0, 0], s=5, c=[IMIN, IMAX],
-                           cmap=plt.cm.Greys_r, lw=0)
-    ax.set_rmax(DMAX)
-    ax.grid(True)
+    while(1):
+        print("salut")
+        lidar = RPLidar(PORT_NAME)
+       # fig = plt.figure()
+        ax = plt.subplot(111, projection='polar')
+        line = ax.scatter([0, 0], [0, 0], s=5, c=[IMIN, IMAX],
+                            cmap=plt.cm.Greys_r, lw=0)
+       # ax.set_rmax(DMAX)
+        #ax.grid(True)
 
-    iterator = lidar.iter_scans()
+        iterator = lidar.iter_scans(max_buf_meas=1000, min_len=5)
 
-    affichage_comprehension(iterator,line)
+        affichage_comprehension(iterator,line)
 
-    ani = animation.FuncAnimation(fig, update_line,
-        fargs=(iterator, line), interval=50,cache_frame_data=False)
-    
-    plt.show()
-    lidar.stop()
-    lidar.disconnect()
+        #ani = animation.FuncAnimation(fig, update_line,
+         #   fargs=(iterator, line), interval=50,cache_frame_data=False)
+        
+       # plt.show()
+        lidar.stop()
+        lidar.disconnect()
 
 if __name__ == '__main__':
     run()
