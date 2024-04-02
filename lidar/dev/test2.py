@@ -5,6 +5,7 @@ from adafruit_rplidar import RPLidar
 
 # Setup the RPLidar
 PORT_NAME = 'COM9' #'/dev/ttyUSB0'
+#lidar = RPLidar(None, PORT_NAME, timeout=3)
 lidar = RPLidar(None, PORT_NAME, timeout=3)
 
 # used to scale data to fit on the screen
@@ -13,7 +14,7 @@ max_distance = 4000
 def process_data(data):
     print(data)
 
-scan_data = [0]*360
+scan_data = [-1]*360
 
 try:
 #    print(lidar.get_info())
@@ -24,5 +25,7 @@ try:
 
 except KeyboardInterrupt:
     print('Stopping.')
+
 lidar.stop()
 lidar.disconnect()
+
