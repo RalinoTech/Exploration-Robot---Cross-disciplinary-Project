@@ -18,8 +18,12 @@ def update_line(num, iterator, line):
     line.set_array(intens)
     return line
 
-def affichage_comprehension(iterator):
+def affichage_comprehension(iterator,line):
     scan = next(iterator)
+    offsets = np.array([(np.radians(meas[1]), meas[2]) for meas in scan])
+    line.set_offsets(offsets)
+    intens = np.array([meas[0] for meas in scan])
+    line.set_array(intens)
     #scan permet de stocker la qualité de la mesure, l'angle et la mesure de la distance
     print(scan)
     #for meas in scan:
@@ -36,10 +40,11 @@ def run():
 
     iterator = lidar.iter_scans()
 
-    affichage_comprehension(iterator)
+    affichage_comprehension(iterator,line)
 
     ani = animation.FuncAnimation(fig, update_line,
         fargs=(iterator, line), interval=50,cache_frame_data=False)
+    
     plt.show()
     lidar.stop()
     lidar.disconnect()
