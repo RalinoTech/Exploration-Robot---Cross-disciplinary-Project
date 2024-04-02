@@ -1,17 +1,48 @@
+#!/usr/bin/env python3
+'''Animates distances and measurment quality'''
 from rplidar import RPLidar
-lidar = RPLidar('COM9') #/dev/ttyUSB0
- 
-info = lidar.get_info()
-print(info)
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.animation as animation
 
-health = lidar.get_health()
-print(health)
- 
-for i, scan in enumerate(lidar.iter_scans()):
-    print('%d: Got %d measurments' % (i, len(scan)))
-    if i > 10:
-        break
+PORT_NAME = 'COM9'
+DMAX = 4000
+IMIN = 0
+IMAX = 50
 
-lidar.stop()
-lidar.stop_motor()
-lidar.disconnect()
+def update_line(num, iterator, line):
+    scan = next(iterator)
+    offsets = np.array([(np.radians(meas[1]), meas[2]) for meas in scan])
+    line.set_offsets(offsets)
+    intens = np.array([meas[0] for meas in scan])
+    line.set_array(intens)
+    return line
+
+def affichage_comprehension(iterator):
+    scan = next(iterator)
+    #scan permet de stocker la qualité de la mesure, l'angle et la mesure de la distance
+    print(scan)
+    #for meas in scan:
+     #   print(meas[0])
+
+def run():
+    lidar = RPLidar(PORT_NAME)
+    fig = plt.figure()
+    ax = plt.subplot(111, projection='polar')
+    line = ax.scatter([0, 0], [0, 0], s=5, c=[IMIN, IMAX],
+                           cmap=plt.cm.Greys_r, lw=0)
+    ax.set_rmax(DMAX)
+    ax.grid(True)
+
+    iterator = lidar.iter_scans()
+
+    affichage_comprehension(iterator)
+
+    ani = animation.FuncAnimation(fig, update_line,
+        fargs=(iterator, line), interval=50,cache_frame_data=False)
+    plt.show()
+    lidar.stop()
+    lidar.disconnect()
+
+if __name__ == '__main__':
+    run()
