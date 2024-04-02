@@ -14,7 +14,7 @@ def main():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((ip.strip(), int(port)))
 
-    #ser = serial.Serial(port="/dev/<device>", baudrate=9600)
+    #ser = serial.Serial(port="/dev/serial0", baudrate=19200)
 
     order = None
 
@@ -25,13 +25,14 @@ def main():
         3: left
         4: exit
     """
+
     while True:
         data = client.recv(4)
         if data != b"":
             order = int.from_bytes(data, 'little')
             if order == 4: exit()
             print(order)
-            #ser.write("...")
+            #ser.write(str(order).encode("utf-8"))
     client.close()
 
 
