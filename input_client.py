@@ -9,7 +9,7 @@ def main(ip, port, device):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((ip.strip(), int(port)))
 
-    ser = serial.Serial(port=device, baudrate=9600)
+    ser = serial.Serial(port=device, baudrate=19200)
 
     order = None
 
@@ -24,7 +24,8 @@ def main(ip, port, device):
     while True:
         data = client.recv(1)
         if data != b"":
-            order = data.decode("utf-8"))
+            order = data.decode("utf-8")
+
             if order == 'e': exit()
             print(f"order: {order}")
             ser.write(order.encode("utf-8"))
