@@ -19,11 +19,11 @@ class Server:
 
     def send_input(self, key):
 
-        if key not in self.keymap
+        if key not in self.keymap:
             print("[x] Unrecognized key!")
             return
             
-        self.conn.send(order.to_bytes(1, 'little'))
+        self.conn.send(key.encode("utf-8"))
 
     def close_conn(self):
         self.conn.close()

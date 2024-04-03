@@ -24,7 +24,7 @@ def main(ip, port, device):
     while True:
         data = client.recv(1)
         if data != b"":
-            order = chr(int.from_bytes(data, 'little'))
+            order = data.decode("utf-8"))
             if order == 'e': exit()
             print(f"order: {str(order)}")
             ser.write(str(order).encode("utf-8"))
