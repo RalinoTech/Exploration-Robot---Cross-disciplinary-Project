@@ -9,6 +9,8 @@ class Server:
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server.bind((ip, port))
 
+        self.keymap = "zqsde"
+
     def connect(self):
 
         self.server.listen()
@@ -17,21 +19,12 @@ class Server:
 
     def send_input(self, key):
 
-        if key == "z":
-            order = 0
-        elif key == "s":
-            order = 1
-        elif key == "d":
-            order = 2
-        elif key == "q":
-            order = 3
-        elif key == "esc":
-            order = 4
+        if key == in self.keymap
         else:
             print("[x] Unrecognized key!")
             return
             
-        self.conn.send(order.to_bytes(4, 'little'))
+        self.conn.send(order.to_bytes(1, 'little'))
 
     def close_conn(self):
         self.conn.close()

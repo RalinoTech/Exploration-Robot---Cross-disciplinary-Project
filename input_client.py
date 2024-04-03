@@ -6,11 +6,6 @@ import argparse
 
 def main(ip, port, device):
 
-    if len(sys.argv) != 3:
-        print("Usage: ./input_server.py <SERVER_IP> <SERVER_PORT>")
-        exit(-1)
-
-    ip, port = sys.argv[1:]
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((ip.strip(), int(port)))
 
@@ -19,18 +14,18 @@ def main(ip, port, device):
     order = None
 
     """
-        0: forward
-        1: backward
-        2: right
-        3: left
-        4: exit
+        z: forward
+        s: backward
+        d: right
+        q: left
+        e: exit
     """
 
     while True:
-        data = client.recv(4)
+        data = client.recv(1)
         if data != b"":
-            order = int.from_bytes(data, 'little')
-            if order == 4: exit()
+            order = chr(int.from_bytes(data, 'little'))
+            if order == 'e': exit()
             print(f"order: {str(order)}")
             ser.write(str(order).encode("utf-8"))
     client.close()
@@ -44,4 +39,4 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--serial-device", default="/dev/serial0", help="Target UART device")
 
     args = parser.parse_args()
-    print(*vars(args).values())
+    main(*vars(args).values())
