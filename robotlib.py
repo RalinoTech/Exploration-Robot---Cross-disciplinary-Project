@@ -22,7 +22,8 @@ class Server:
         if key not in self.keymap:
             print("[x] Unrecognized key!")
             return
-            
+        
+        print(f"sent: {key}")
         self.conn.send(key.encode("utf-8"))
 
     def close_conn(self):
