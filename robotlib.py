@@ -19,8 +19,7 @@ class Server:
 
     def send_input(self, key):
 
-        if key == in self.keymap
-        else:
+        if key not in self.keymap
             print("[x] Unrecognized key!")
             return
             
