@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from robotlib import Server
+import sys
 
 app = Flask(__name__)
 
@@ -14,6 +15,12 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    server = Server("192.168.166.148", 7070)
+
+    if len(sys.argv) != 3:
+        print("Usage: ./main.py <SERVER_IP> <SERVER_PORT>")
+        exit(-1)
+    
+    server = Server(sys.argv[1], int(sys.argv[2]))
     server.connect()
-    app.run(debug=True)
+
+    app.run(debug=False, port=5000, use_reloader=False)

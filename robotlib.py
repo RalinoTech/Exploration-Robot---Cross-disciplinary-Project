@@ -5,13 +5,13 @@ import socket
 class Server:
     def __init__(self, ip, port):
 
-        self.ip, self.port = ip, port
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server.bind((ip.strip(), int(port)))
+        self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.server.bind((ip, port))
 
     def connect(self):
 
-        self.server.listen()        
+        self.server.listen()
         self.conn, self.robot_addr = self.server.accept()
 
 
