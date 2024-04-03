@@ -7,17 +7,30 @@ document.addEventListener('keydown', function (event) {
     if (arrowKeys.includes(key) && !arrowPressedKeys.includes(key)) {
         arrowPressedKeys.push(key); // Ajoute la touche actuellement enfoncée à la liste
         document.getElementById('key' + key.toUpperCase()).classList.add('key-pressed');
-        sendData(key); // Envoie la touche enfoncée au serveur Flask
     }
 });
 
 document.addEventListener('keyup', function (event) {
     const key = event.key.toLowerCase();
-    if (arrowPressedKeys.includes(key)) {
-        arrowPressedKeys = arrowPressedKeys.filter(k => k !== key); // Retire la touche relâchée de la liste
-        document.getElementById('key' + key.toUpperCase()).classList.remove('key-pressed');
+    if (arrowKeys.includes(key)) {
+        const index = arrowPressedKeys.indexOf(key);
+        if (index > -1) {
+            arrowPressedKeys.splice(index, 1); // Retire la touche relâchée de la liste
+            document.getElementById('key' + key.toUpperCase()).classList.remove('key-pressed');
+        }
     }
 });
+
+// Fonction pour envoyer les touches enfoncées au serveur Flask
+function sendPressedKeys() {
+    arrowPressedKeys.forEach(function (key) {
+        sendData(key); // Envoie la touche enfoncée au serveur Flask
+    });
+}
+
+// Envoie les touches enfoncées toutes les 100 millisecondes
+setInterval(sendPressedKeys, 100);
+
 
 const speedKeys = ['1', '2', '3'];
 let activeSpeed = null;
