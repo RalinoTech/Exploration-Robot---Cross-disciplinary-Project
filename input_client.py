@@ -31,6 +31,7 @@ def main():
         if data != b"":
             order = int.from_bytes(data, 'little')
             if order == 4: exit()
+            print(f"order: {str(order)}")
             ser.write(str(order).encode("utf-8"))
     client.close()
 
