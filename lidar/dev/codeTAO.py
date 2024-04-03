@@ -1,55 +1,39 @@
-#!/usr/bin/env python3
-'''Animates distances and measurment quality'''
-from rplidar import RPLidar
+import os
+from math import floor
+from adafruit_rplidar import RPLidar
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.animation as animation
 
-PORT_NAME = 'COM3'
-DMAX = 4000
-IMIN = 0
-IMAX = 500
+# Setup the RPLidar
+PORT_NAME = 'COM3' #'/dev/ttyUSB0'
+#lidar = RPLidar(None, PORT_NAME, timeout=3)
+lidar = RPLidar(None, PORT_NAME)
 
-def update_line(num, iterator, line):
-    scan = next(iterator)
-    offsets = np.array([(np.radians(meas[1]), meas[2]) for meas in scan])
-    line.set_offsets(offsets)
-    intens = np.array([meas[0] for meas in scan])
-    line.set_array(intens)
-    return line
+# used to scale data to fit on the screen
+max_distance = 4000
 
-def affichage_comprehension(iterator,line):
-    scan = next(iterator)
-    offsets = np.array([(np.radians(meas[1]), meas[2]) for meas in scan])
-    line.set_offsets(offsets)
-    intens = np.array([meas[0] for meas in scan])
-    line.set_array(intens)
-    #scan permet de stocker la qualité de la mesure, l'angle et la mesure de la distance
-    print(scan)
-    #for meas in scan:
-     #   print(meas[0])
+def process_data(data):
+    print(data)
 
-def run():
-    #while(1):
-    print("**************************************************************************************************************")
-    lidar = RPLidar(PORT_NAME)
-    fig = plt.figure()
-    ax = plt.subplot(111, projection='polar')
-    line = ax.scatter([0, 0], [0, 0], s=5, c=[IMIN, IMAX],
-                        cmap=plt.cm.Greys_r, lw=0)
-    ax.set_rmax(DMAX)
-    ax.grid(True)
+scan_data = [-1]*360
 
-    iterator = lidar.iter_scans(max_buf_meas=1000, min_len=5)
+try:
+#    print(lidar.get_info())
+    for scan in lidar.iter_scans():
+        for (_, angle, distance) in scan:
+            ang=min([359, floor(angle)])
+            scan_data[ang] = distance
+            #if ang>180 and ang<360 and distance<300 and distance!=-1:
+                #print("ARRA LES CONDéES")
+            #else:
+                #print("je roule")
+           
 
-    affichage_comprehension(iterator,line)
+except KeyboardInterrupt:
+    print('Stopping.')
 
-    ani = animation.FuncAnimation(fig, update_line,
-        fargs=(iterator, line), interval=50,cache_frame_data=False)
-    
-    plt.show()
-    lidar.stop()
-    lidar.disconnect()
+lidar.stop()
+lidar.disconnect()
 
-if __name__ == '__main__':
-    run()
+
+
