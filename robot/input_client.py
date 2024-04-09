@@ -8,7 +8,7 @@ from clientlib import Client
 def main(ip, port, device):
 
     client = Client(device)
-    client.connect((ip.strip(), int(port)))
+    client.connect(ip.strip(), int(port))
 
     order = None
 
