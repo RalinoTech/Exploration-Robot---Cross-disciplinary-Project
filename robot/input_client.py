@@ -3,13 +3,12 @@
 import socket
 import serial
 import argparse
+from clientlib import Client
 
 def main(ip, port, device):
 
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client = Client(device)
     client.connect((ip.strip(), int(port)))
-
-    ser = serial.Serial(port=device, baudrate=19200)
 
     order = None
 
@@ -22,7 +21,7 @@ def main(ip, port, device):
     """
 
     while True:
-        data = client.recv(1)
+        data = client.read()
         if data != b"":
             order = data.decode("utf-8")
 
