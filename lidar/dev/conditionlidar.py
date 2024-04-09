@@ -1,10 +1,11 @@
+#Programme pour détecter des obstacles
 import os
 from math import floor
 from adafruit_rplidar import RPLidar
 
 
 # Setup the RPLidar
-PORT_NAME = '/dev/ttyUSB0' #'/dev/ttyUSB0'
+PORT_NAME = 'COM9' #'/dev/ttyUSB0'
 #lidar = RPLidar(None, PORT_NAME, timeout=3)
 lidar = RPLidar(None, PORT_NAME, timeout=3)
 
@@ -23,7 +24,7 @@ try:
             ang=min([359, floor(angle)])
             scan_data[ang] = distance
             if ang>180 and ang<360 and distance<300 and distance!=-1:
-                print("ARRA LES CONDéES")
+                print("Alerte obstacle proche")
             else:
                 print("je roule")
 
