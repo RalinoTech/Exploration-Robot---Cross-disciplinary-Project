@@ -1,3 +1,5 @@
+#Code avec recuperation angle/distance
+
 import os
 from math import floor
 from adafruit_rplidar import RPLidar
@@ -5,10 +7,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Setup the RPLidar
-PORT_NAME = 'COM3' #'/dev/ttyUSB0'
+PORT_NAME = 'COM9' #'/dev/ttyUSB0'
 #lidar = RPLidar(None, PORT_NAME, timeout=3)
-lidar = RPLidar(None, PORT_NAME)
-
+lidar = RPLidar(None,PORT_NAME)
 # used to scale data to fit on the screen
 max_distance = 4000
 
@@ -48,3 +49,4 @@ except KeyboardInterrupt:
 
 lidar.stop()
 lidar.disconnect()
+lidar.reset()

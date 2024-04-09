@@ -1,3 +1,5 @@
+#Code pour afficher la carte de la vue du lidar
+
 #!/usr/bin/env python3
 '''Animates distances and measurment quality'''
 from rplidar import RPLidar
@@ -32,7 +34,7 @@ def affichage_comprehension(iterator,line):
 def run():
     while(1):
         print("salut")
-        lidar = RPLidar(PORT_NAME)
+        lidar = RPLidar(PORT_NAME, baudrate=256000)
        # fig = plt.figure()
         ax = plt.subplot(111, projection='polar')
         line = ax.scatter([0, 0], [0, 0], s=5, c=[IMIN, IMAX],
