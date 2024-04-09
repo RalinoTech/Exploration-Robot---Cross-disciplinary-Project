@@ -24,13 +24,21 @@ class Client:
         self.client.connect((ip, port))
         self.conn, self.robot_addr = self.server.accept()
 
-    def read(self):
+    def send_to_ST(self, data):
+        self.device.write(data)
+
+    def rnp(self):
 
         hdr = self.conn.recv(4).decode("utf-8")
 
         if hdr == "INPT":
             key = self.conn.recv(1).decode("utf-8")
-            return {'type':}
+            if key == "e":
+                self.client.close()
+                exit()
+            else:
+                print(f"order: {key}")
+                self.send_to_ST(key.encode("utf-8"))
             
 if __name__ == "__main__":
     print("[x] This code is a module!")

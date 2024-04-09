@@ -21,14 +21,7 @@ def main(ip, port, device):
     """
 
     while True:
-        data = client.read()
-        if data != b"":
-            order = data.decode("utf-8")
-
-            if order == 'e': exit()
-            print(f"order: {order}")
-            ser.write(order.encode("utf-8"))
-    client.close()
+        data = client.rnp()
 
 
 if __name__ == "__main__":

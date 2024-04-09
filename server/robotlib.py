@@ -39,7 +39,7 @@ class Server:
     def close_conn(self):
         self.conn.close()
 
-    def read(self):
+    def rnp(self):
         hdr = self.conn.recv(4).decode("utf-8")
 
         if hdr == "DATA":
