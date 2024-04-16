@@ -16,11 +16,11 @@ def index():
 
 if __name__ == '__main__':
 
-    if len(sys.argv) != 3:
-        print("Usage: ./main.py <SERVER_IP> <SERVER_PORT>")
-        exit(-1)
+    #if len(sys.argv) != 3:
+    #    print("Usage: ./main.py <SERVER_IP> <SERVER_PORT>")
+    #    exit(-1)
     
-    server = Server(sys.argv[1], int(sys.argv[2]))
-    server.connect()
+    #server = Server(sys.argv[1], int(sys.argv[2]))
+    #server.connect()
 
     app.run(debug=False, port=5000, use_reloader=False)
