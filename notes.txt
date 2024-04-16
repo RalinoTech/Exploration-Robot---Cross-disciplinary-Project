@@ -1,0 +1,7 @@
+# Coté serveur
+
+ffplay -fflags nobuffer -flags low_delay -framedrop -strict experimental -analyzeduration 0 -probesize 500000 -sync ext -vf setpts=0 udp://192.168.246.22:5000
+
+# Coté robot
+
+ffmpeg -s 320x240 -i /dev/video0 -preset ultrafast -tune zerolatency -codec libx264 -f mpegts udp://192.168.246.22:5000

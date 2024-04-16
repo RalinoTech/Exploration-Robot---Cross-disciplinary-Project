@@ -24,7 +24,7 @@ class Server:
     def connect(self):
 
         self.server.listen()
-        self.conn, self.robot_addr = self.server.accept()
+        self.conn, _ = self.server.accept()
 
 
     def send_input(self, key):

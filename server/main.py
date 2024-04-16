@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from robotlib import Server
+from serverlib import Server
 import sys
 
 app = Flask(__name__)
