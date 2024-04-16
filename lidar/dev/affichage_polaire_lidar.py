@@ -34,11 +34,12 @@ print(len(liste_lidar))
 distance_lidar=[]
 
 for val in liste_lidar:
+    distance_lidar.append(val)
     #on ajoute le point à la matrice si !=-1
-    if val!=-1:
-        distance_lidar.append(val)
-    else:
-        distance_lidar.append(4000)
+    #if val!=-1:
+        #distance_lidar.append(val)
+    #else:
+        #distance_lidar.append(4000)
 
 print(distance_lidar)
 
@@ -62,7 +63,6 @@ print("nouvelle matrice ",distance_lidar)
 
 # Créer un graphique en coordonnées polaires
 fig, ax = plt.subplots(subplot_kw=dict(projection='polar'))
-
 
 #on filtre les points
 

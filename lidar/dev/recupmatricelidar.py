@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.animation as animation
 
-PORT_NAME = 'COM9'
+PORT_NAME = '/dev/ttyUSB0'
 DMAX = 4000
 IMIN = 0
 IMAX = 500
