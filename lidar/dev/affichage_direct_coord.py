@@ -69,7 +69,12 @@ try:
         ax.set_theta_zero_location("N")  # Theta zero location (North)
         ax.set_theta_direction(-1)  # Theta increasing direction (clockwise)
 
-        plt.show()
+        #plt.show()
+        plt.ion()
+        plt.draw()
+        plt.pause(0.01)
+        # plt.ioff()
+        # plt.show()
 
     #...............................................................................................................
 
