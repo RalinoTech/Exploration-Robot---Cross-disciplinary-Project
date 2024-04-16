@@ -13,6 +13,9 @@ PORT_NAME = '/dev/ttyUSB0' #'/dev/ttyUSB0'
 #lidar = RPLidar(None, PORT_NAME, timeout=3)
 lidar = RPLidar(None, PORT_NAME, timeout=3)
 
+#liste distance LIDAR
+liste_lidar=[]
+
 # used to scale data to fit on the screen
 max_distance = 4000
 
@@ -37,49 +40,25 @@ try:
 
         print(len(liste_lidar))
 
-        distance_lidar=[]
-
-        for val in liste_lidar:
-            distance_lidar.append(val)
-            #on ajoute le point à la matrice si !=-1
-            #if val!=-1:
-                #distance_lidar.append(val)
-            #else:
-                #distance_lidar.append(4000)
-
-        print(distance_lidar)
-
         #........................................................................................................................................................
         #Affichage des données
-
         # Créer une liste d'angles en degrés
         angles_lidar=[]
         for i in range(360):
             angles_lidar.append(i)
 
-        print("taille angle", len(angles_lidar), "taille matrice", len(distance_lidar))
-        print("nouvelle matrice ",distance_lidar)
-
-        # Convertir les angles en radians
-        #angles_rad = np.deg2rad(angles_lidar)
-
-        # Créer une liste de distances
-        # distances_int = np.random.sample(len(angles))
-        # distances = distances_int*5000
+        # Normaliser les distances
+        max_distance = max(liste_lidar)
+        distance_lidar = [x/max_distance*10000 for x in liste_lidar]
 
         # Créer un graphique en coordonnées polaires
         fig, ax = plt.subplots(subplot_kw=dict(projection='polar'))
 
-        #on filtre les points
-
         # Afficher le graphique
         ax.scatter(angles_lidar, distance_lidar, c=distance_lidar, cmap='viridis')
 
-        #intervalle etendu
-        #ax.set_rticks([0,1000,5000,10000, 15000])  # Less radial ticks
-
         #intervalle précis
-        ax.set_rticks([0,1000,5000,10000])
+        ax.set_rticks([0,2500,5000,7500,10000])
 
         ax.set_rlabel_position(-22.5)  # Get radial labels away from plotted point
         ax.grid(True)
@@ -90,10 +69,7 @@ try:
         ax.set_theta_direction(-1)  # Theta increasing direction (clockwise)
 
         plt.show()
-
-
-
-
+        #........................................................................................................................................................
 
 except KeyboardInterrupt:
     print('Stopping.')
