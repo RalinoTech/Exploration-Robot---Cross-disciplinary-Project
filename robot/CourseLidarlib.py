@@ -22,7 +22,7 @@ class CourseLidar:
         except KeyboardInterrupt:
             print('Stopping.')
 
-        self.stop_measurement()  # Arrêter le moteur du lidar
+        
 
 
 if __name__ == "__main__":
