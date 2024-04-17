@@ -5,3 +5,6 @@ Il me faut un retour sur les roues codeuses, pour connaître la position du robo
 Stratégie :
 Créer une matrice qui s'incrémente au fûr et à mesure avec les points du retour lidar.
 Quand le robot avance il
+
+Pistes:
+https://github.com/AdroitAnandAI/SLAM-on-Raspberry-Pi
