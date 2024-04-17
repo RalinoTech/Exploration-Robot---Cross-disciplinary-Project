@@ -10,12 +10,16 @@ lidar = RPLidar(None, PORT_NAME, timeout=3)
 # Create a figure and axis for the plot
 fig, ax = plt.subplots()
 
+#global verrou
+global verrou
+verrou=1
+
 # used to scale data to fit on the screen
-max_distance = 9000
+max_distance = 5000
 
 def affichage_lidar(verrou):
         #if verrou == 1:
-        plt.gca(); ax.text(0, 0, '♣',color = 'red') #♣
+        plt.gca(); ax.text(0, 0, '▲',color = 'red') #♣
         #verrou=0
 
 def actualisation():
@@ -34,14 +38,14 @@ def process_data(data):
             # Convert polar coordinates to Cartesian coordinates
             y = distance * cos(radians(angle))
             x = distance * sin(radians(angle))
-            plt.xlabel('<- arrière du robot            &            avant du robot ->')
-            plt.ylabel('<- gauche du robot            &            droite du robot ->')
+            plt.ylabel('<- arrière du robot            &            avant du robot ->')
+            plt.xlabel('<- gauche du robot            &            droite du robot ->')
             ax.plot(x, y, 'bo', markersize=1)  # Plot each point
 
 
 try:
     #verrou pour affichage du lidar
-    verrou=1
+    #verrou=1
 
     for scan in lidar.iter_scans():
         scan_data = [-1] * 360  # Initialize data for each new scan
