@@ -4,11 +4,13 @@ import socket
 import serial
 import argparse
 from clientlib import Client
+from CourseLidarlib import CourseLidar
 
 def main(ip, port, device):
 
     client = Client(device)
     client.connect(ip.strip(), int(port))
+    course = CourseLidar()
 
     order = None
 
@@ -22,6 +24,11 @@ def main(ip, port, device):
 
     while True:
         data = client.rnp()
+        valeur= course.recup_une_valeur()
+        client.send_to_computer(valeur)
+
+
+
 
 
 if __name__ == "__main__":
