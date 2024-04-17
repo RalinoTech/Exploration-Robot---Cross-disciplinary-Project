@@ -11,7 +11,7 @@ lidar = RPLidar(None, PORT_NAME, timeout=3)
 fig, ax = plt.subplots()
 
 # used to scale data to fit on the screen
-max_distance = 2000
+max_distance = 8000
 
 def process_data(data):
     ax.clear()  # Clear the previous plot
@@ -25,14 +25,15 @@ def process_data(data):
             x = distance * cos(radians(angle))
             y = distance * sin(radians(angle))
             plt.xlabel('<- arrière du robot            &            avant du robot ->')
-            plt.ylabel('Plan détection LIDAR')
+            plt.ylabel('<- gauche du robot            &            droite du robot ->')
             ax.plot(x, y, 'bo', markersize=1)  # Plot each point
-            #plt.title('falut')
+            plt.title("test")
 
     plt.draw()
     plt.pause(0.01)
 
 try:
+
     for scan in lidar.iter_scans():
         scan_data = [-1] * 360  # Initialize data for each new scan
         for (_, angle, distance) in scan:
