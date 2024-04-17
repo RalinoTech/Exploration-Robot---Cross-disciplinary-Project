@@ -8,3 +8,4 @@ Quand le robot avance il
 
 Pistes:
 https://github.com/AdroitAnandAI/SLAM-on-Raspberry-Pi
+https://www.youtube.com/watch?v=qNdcXUEF7KU&ab_channel=RoboticsWeekends
