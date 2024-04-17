@@ -61,7 +61,6 @@ try:
         process_data(scan_data)
         affichage_lidar(verrou)
         actualisation()
-        
 
 
 except KeyboardInterrupt:
