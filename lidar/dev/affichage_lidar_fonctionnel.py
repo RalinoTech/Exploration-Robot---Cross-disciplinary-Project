@@ -33,11 +33,12 @@ def process_data(data):
 
 try:
     for scan in lidar.iter_scans():
-        scan_data = [-1] * 360  # Initialize data for each new scan
+        scan_data = [-1.0] * 360  # Initialize data for each new scan
         for (_, angle, distance) in scan:
             ang = int(angle) % 360
             scan_data[ang] = distance
         process_data(scan_data)
+        #print(type(scan_data[0]))
 
 except KeyboardInterrupt:
     print('Stopping.')
