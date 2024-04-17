@@ -11,7 +11,7 @@ lidar = RPLidar(None, PORT_NAME, timeout=3)
 fig, ax = plt.subplots()
 
 # used to scale data to fit on the screen
-max_distance = 4000
+max_distance = 2000
 
 def process_data(data):
     ax.clear()  # Clear the previous plot
@@ -24,6 +24,8 @@ def process_data(data):
             # Convert polar coordinates to Cartesian coordinates
             x = distance * cos(radians(angle))
             y = distance * sin(radians(angle))
+            plt.xlabel('<- arrière du robot            &            avant du robot ->')
+            plt.ylabel('Plan détection LIDAR')
             ax.plot(x, y, 'bo', markersize=1)  # Plot each point
 
     plt.draw()
