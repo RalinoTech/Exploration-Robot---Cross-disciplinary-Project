@@ -43,9 +43,11 @@ class Server:
         hdr = self.conn.recv(4).decode("utf-8")
 
         if hdr == "DATA":
+            mat_points=[]
             data_size = int.from_bytes(self.conn.recv(4), 'little')
-            data = self.conn.recv(data_size)
-            return data
+            for i in range (data_size/24):
+                mat_points.append(self.conn.recv(24))
+            return mat_points
             
 if __name__ == "__main__":
     print("[x] This code is a module!")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import struct
 import socket
 import serial
 
@@ -39,6 +39,21 @@ class Client:
             else:
                 print(f"order: {key}")
                 self.send_to_ST(key.encode("utf-8"))
+
+    def send_to_computer(self, data):
+
+        self.client.send(b"DATA")
+
+        data_bytes = data.encode('utf-8')
+        length_bytes = len(data_bytes)
+        length_bytes_struct = struct.pack('I', length_bytes)
+        self.client.send(length_bytes_struct)
+        for i in range (len(data)):
+            self.client.send(data[i].encode("utf-8"))
+            
+
+
+
 
 if __name__ == "__main__":
     print("[x] This code is a module!")
