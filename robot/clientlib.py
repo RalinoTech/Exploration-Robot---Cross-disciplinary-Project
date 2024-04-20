@@ -22,7 +22,6 @@ class Client:
         #self.device = serial.Serial(port=device_string, baudrate=19200)
 
     def connect(self, ip, port):
-
         self.client.connect((ip, port))
 
     def send_to_ST(self, data):
@@ -41,10 +40,8 @@ class Client:
                 print(f"order: {key}")
                 self.send_to_ST(key.encode("utf-8"))
 
-
     def send_to_computer(self, data):
         self.client.send(b"DATA")
-
 
         # Pack the floats into binary data
         data_bytes = struct.pack(f"{len(data)}f", *data)
@@ -55,7 +52,6 @@ class Client:
 
         # Send the binary data
         self.client.send(data_bytes)
-
 
 if __name__ == "__main__":
     print("[x] This code is a module!")
