@@ -2,6 +2,7 @@
 import struct
 import socket
 import serial
+import json
 
 """
     Magic headers:
@@ -18,7 +19,7 @@ class Client:
 
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.device = serial.Serial(port=device_string, baudrate=19200)
+        #self.device = serial.Serial(port=device_string, baudrate=19200)
 
     def connect(self, ip, port):
 
@@ -40,19 +41,20 @@ class Client:
                 print(f"order: {key}")
                 self.send_to_ST(key.encode("utf-8"))
 
-    def send_to_computer(self, data):
 
+    def send_to_computer(self, data):
         self.client.send(b"DATA")
 
-        data_bytes = data.encode('utf-8')
-        length_bytes = len(data_bytes)
-        length_bytes_struct = struct.pack('I', length_bytes)
+
+        # Pack the floats into binary data
+        data_bytes = struct.pack(f"{len(data)}f", *data)
+
+        # Send the length of the data
+        length_bytes_struct = struct.pack('I', len(data_bytes))
         self.client.send(length_bytes_struct)
-        for i in range (len(data)):
-            self.client.send(data[i].encode("utf-8"))
-            
 
-
+        # Send the binary data
+        self.client.send(data_bytes)
 
 
 if __name__ == "__main__":
