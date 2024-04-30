@@ -17,7 +17,9 @@ def main(ip, port, device):
     #Test d'envoie d'une matrice
 
     course = CourseLidar()
-    course.update_scan_data()
+
+    course.start_scanning()
+
     # Sending the JSON string to the server
     order = None
 
@@ -32,9 +34,9 @@ def main(ip, port, device):
     while True:
         #data = client.rnp()
         mat=course.get_last_scan_data()
-        print(mat)
         client.send_to_computer(mat)
         print(mat)
+        time.sleep(2)
         
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from serverlib import Server
 import sys
+import time
 
 app = Flask(__name__)
 
@@ -24,5 +25,6 @@ if __name__ == '__main__':
     server.connect()
     while(1):
         print(server.rnp())
+        time.sleep(1)
     app.run(debug=False, port=5000, use_reloader=False)
     
