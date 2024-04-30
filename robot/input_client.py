@@ -6,18 +6,19 @@ import time
 import argparse
 from clientlib import Client
 from CourseLidarlib import CourseLidar
-import json
+import threading
+
+#def recup_data(client):
+#    while True: 
+#        data = client.rnp()
+#        # Do something with the received data
 
 def main(ip, port, device):
-
     client = Client(device)
     client.connect(ip.strip(), int(port))
     
-
-    #Test d'envoie d'une matrice
-
+    # Test sending a matrix
     course = CourseLidar()
-
     course.start_scanning()
 
     # Sending the JSON string to the server
@@ -31,13 +32,17 @@ def main(ip, port, device):
         e: exit
     """
     time.sleep(5)
+
+    # Start the thread for receiving data
+#    threadlid = threading.Thread(target=recup_data, args=(client,))
+#    threadlid.start()
+
+    # Main loop for sending Lidar data
     while True:
-        #data = client.rnp()
-        mat=course.get_last_scan_data()
+        mat = course.get_last_scan_data()
         client.send_to_computer(mat)
         print(mat)
         time.sleep(2)
-        
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -48,5 +53,3 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     main(*vars(args).values())
-
-    

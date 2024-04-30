@@ -2,7 +2,6 @@ from math import floor
 from adafruit_rplidar import RPLidar
 import time
 import threading
-import queue
 
 class CourseLidar:
     def __init__(self, port_name='/dev/ttyUSB0', timeout=3):
@@ -11,7 +10,6 @@ class CourseLidar:
         self.scan_data = [-1] * 360
         self.last_scan_data = None
         self.scan_thread = None
-        self.scan_queue = queue.Queue()
 
     def update_scan_data(self):
         print("Scanning started.")
