@@ -21,3 +21,9 @@ Nouveaux liens 30/04/24 !
 https://atsushisakai.github.io/PythonRobotics/modules/mapping/lidar_to_grid_map_tutorial/lidar_to_grid_map_tutorial.html
 https://github.com/charleslf2/2D-simulation-of-Simulataneous-Localisation-And-Maping-SLAM-
 
+Slam Toolbox librairie
+https://msadowski.github.io/hands-on-with-slam_toolbox/
+
+Version artisanale !
+
+Une carte crée avec pygame, qu'on incrémente au fur et à mesure, 
