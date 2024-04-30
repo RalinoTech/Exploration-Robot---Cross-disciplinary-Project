@@ -13,8 +13,11 @@ https://github.com/cartographer-project/cartographer?tab=readme-ov-file
 https://google-cartographer.readthedocs.io/en/stable/
 https://docs.nvidia.com/isaac/archive/2020.1/packages/navigation/doc/cartographer.html
 
-http://wiki.ros.org/cartographer
-
-
 
 Se renseigner sur google carthographer !
+
+Nouveaux liens 30/04/24 !
+
+https://atsushisakai.github.io/PythonRobotics/modules/mapping/lidar_to_grid_map_tutorial/lidar_to_grid_map_tutorial.html
+https://github.com/charleslf2/2D-simulation-of-Simulataneous-Localisation-And-Maping-SLAM-
+
