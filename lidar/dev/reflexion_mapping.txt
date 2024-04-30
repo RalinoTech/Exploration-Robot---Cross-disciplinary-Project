@@ -24,6 +24,10 @@ https://github.com/charleslf2/2D-simulation-of-Simulataneous-Localisation-And-Ma
 Slam Toolbox librairie
 https://msadowski.github.io/hands-on-with-slam_toolbox/
 
-Version artisanale !
+Version artisanale (sans code déjà fait) !
 
-Une carte crée avec pygame, qu'on incrémente au fur et à mesure, 
+Une carte crée avec pygame, qu'on incrémente au fur et à mesure avec les informations des codeurs.
+
+
+
+Stockage de la matrice :
