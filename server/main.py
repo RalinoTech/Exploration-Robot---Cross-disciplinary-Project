@@ -22,6 +22,7 @@ if __name__ == '__main__':
     
     server = Server(sys.argv[1], int(sys.argv[2]))
     server.connect()
-    print(server.rnp())
+    while(1):
+        print(server.rnp())
     app.run(debug=False, port=5000, use_reloader=False)
     
