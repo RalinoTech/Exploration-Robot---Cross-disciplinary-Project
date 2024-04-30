@@ -43,7 +43,7 @@ def process_data(data):
 
 
     plt.draw()
-    np.savetxt('matrice.txt', matrice_stockage, delimiter=' ', fmt='%d')
+    #np.savetxt('matrice.txt', matrice_stockage, delimiter=' ', fmt='%d')
     plt.pause(100)
 
 try:
