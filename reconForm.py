@@ -19,7 +19,7 @@ def detect_formes(img):
             if area > SEUIL_TAILLE:
                 cv2.drawContours(img, [approx], 0, (0, 255, 0), 3)
                 x, y, w, h = cv2.boundingRect(approx)
-                if maw, h) > SEUIL_TAILLE:  # Vérifier si la taille du carré dépasse le seuil
+                if max (w, h) > SEUIL_TAILLE:  # Vérifier si la taille du carré dépasse le seuil
                     cv2.putText(img, "DANGER PROCHE", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
 # Initialisation de la webcam
