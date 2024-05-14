@@ -2,6 +2,7 @@ import os
 from math import cos, sin, radians
 import matplotlib.pyplot as plt
 from adafruit_rplidar import RPLidar
+import numpy as np
 
 
 #on veut enregistrer les points du Lidar sur la carte pour les cartographier
@@ -12,8 +13,17 @@ from adafruit_rplidar import RPLidar
 PORT_NAME = '/dev/ttyUSB0'
 lidar = RPLidar(None, PORT_NAME, timeout=3)
 
+
+#stockage de la matrice 
+
+nb_ligne_matrice=10000
+nb_colonne_matrice=10000
+matrice_stockage=np.zeros((nb_ligne_matrice,nb_colonne_matrice))
+
 # Create a figure and axis for the plot
 fig, ax = plt.subplots()
+
+
 
 # used to scale data to fit on the screen
 max_distance = 2000
@@ -32,6 +42,9 @@ def process_data(data):
             plt.xlabel('<- arrière du robot            &            avant du robot ->')
             plt.ylabel('Plan détection LIDAR')
             ax.plot(x, y, 'bo', markersize=1)  # Plot each point
+
+            #stockage des retours lidar dans la matrice matrice_stockage
+            #matrice_stockage[round(x)+5000][round(y)+5000]=1
 
     plt.draw()
     plt.pause(0.01)
