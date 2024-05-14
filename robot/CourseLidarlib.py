@@ -21,6 +21,7 @@ class CourseLidar:
                 self.last_scan_data = self.scan_data[:]  # Copy the data to last_scan_data
                 
         except KeyboardInterrupt:
+            self.stop_scanning()
             print('Stopping.')
         
 
