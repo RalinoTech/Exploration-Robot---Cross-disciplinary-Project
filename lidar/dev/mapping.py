@@ -20,7 +20,7 @@ fig, ax = plt.subplots()
 max_distance = 10000
 
 #gestion des données du lidar
-def process_data(data,translationx,translationy):
+def process_data(data,x_translation,y_translation):
 
     ax.clear()  # Clear the previous plot
     ax.set_xlim(-max_distance, max_distance)
@@ -45,7 +45,7 @@ def process_data(data,translationx,translationy):
             plt.xlabel('<- arrière du robot            &            avant du robot ->')
             plt.ylabel('Plan détection LIDAR')
             ax.plot(x, y, 'bo', markersize=1)  # Plot each point
-            
+
             #affichage de la matrice de stockage
             #print("la matrice de stockage est ",matrice_stockage)
             #np.savetxt('matrice.txt', matrice_stockage, delimiter=' ', fmt='%d')
@@ -55,8 +55,28 @@ def process_data(data,translationx,translationy):
     plt.draw()
     plt.pause(3)
     print("Fin du graphique")
-    
 
+
+#fonction pour afficher les données de la liste
+def affichage_test(data):
+
+    ax.clear()  # Clear the previous plot
+    ax.set_xlim(-max_distance, max_distance)
+    ax.set_ylim(-max_distance, max_distance)
+    ax.set_aspect('equal', adjustable='box')  # Set aspect ratio to equal for correct scaling
+
+    #on affiche les données stockées dans la matrice matrice_stockage
+    #ax.plot(x, y, 'bo', markersize=1)  # Plot each point
+    for ligne in range(10000):
+        for colonne in range(10000):
+            #condition
+            if (matrice_stockage[ligne,colonne] == 1):
+                print("Obstacle")
+                ax.plot(ligne, colonne, 'bo', markersize=1)    
+    plt.draw()
+    plt.pause(50)
+    print("Fin du graphique")
+    
 try:
    
     #on définit scan_data
@@ -72,9 +92,8 @@ try:
     process_data(scan_data,x_translation,y_translation)
 
     #on traite la matrice de stockage
-    
-    #affichage de la matrice
-    #np.savetxt('matrice.txt', matrice_stockage, delimiter=' ', fmt='%d')
+    affichage_test(scan_data)
+
 
    
 except KeyboardInterrupt:
