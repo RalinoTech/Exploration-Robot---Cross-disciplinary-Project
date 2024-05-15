@@ -30,10 +30,9 @@ class CourseLidar:
         self.scan_thread.start()
 
     def stop_scanning(self):
-        if self.scan_thread:
-            self.scan_thread.join()
         self.lidar.stop()
         self.lidar.disconnect()
+
     def get_last_scan_data(self):
         return self.last_scan_data
     
