@@ -17,32 +17,36 @@ def main(ip, port, device):
     client = Client(device)
     client.connect(ip.strip(), int(port))
     
-    # Test sending a matrix
-    course = CourseLidar()
-    course.start_scanning()
-
-    # Sending the JSON string to the server
-    order = None
-
-    """
-        z: forward
-        s: backward
-        d: right
-        q: left
-        e: exit
-    """
-    time.sleep(5)
-
-    # Start the thread for receiving data
     threadlid = threading.Thread(target=recup_data, args=(client,))
     threadlid.start()
 
-    # Main loop for sending Lidar data
-    while True:
-        mat = course.get_last_scan_data()
-        client.send_to_computer(mat)
-        print(mat)
-        time.sleep(2)
+    try:
+        # Test sending a matrix
+        course = CourseLidar()
+        course.start_scanning()
+
+        # Sending the JSON string to the server
+        order = None
+
+        """
+            z: forward
+            s: backward
+            d: right
+            q: left
+            e: exit
+        """
+        time.sleep(5)
+
+        # Main loop for sending Lidar data
+        while True:
+            mat = course.get_last_scan_data()
+            client.send_to_computer(mat)
+            print(mat)
+            time.sleep(2)
+    except KeyboardInterrupt:
+        course.stop_scanning()
+        print("Fin de lidar")
+        
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
