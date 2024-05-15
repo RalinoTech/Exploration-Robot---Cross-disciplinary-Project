@@ -5,12 +5,14 @@ import sys
 import time
 
 app = Flask(__name__)
-data = None
+lidar_data = None
 
 def lidar_rnp(server):
-    global data
+    global lidar_data
     while True:
-        data = [1, 2, 3]
+        recv = server.rnp()
+        if recv != None:
+            lidar_data = recv
 
 
 @app.route('/input', methods=['GET'])
@@ -21,8 +23,8 @@ def handle_input():
 
 @app.route("/lidar", methods=["GET"])
 def recv_lidar_data():
-    global data
-    return jsonify(data)
+    global lidar_data
+    return jsonify(lidar_data)
 
 @app.route('/')
 def index():
