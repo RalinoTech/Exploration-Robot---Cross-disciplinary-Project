@@ -10,7 +10,7 @@
 
 <body>
     <canvas class="video-canvas" id="video-canvas"></canvas>
-    <script type="text/javascript" src="jsmpeg.min.js"></script>
+    <script type="text/javascript" src="../jsmpeg.min.js"></script>
     <script type="text/javascript">
         var canvas = document.getElementById('video-canvas');
         var url = 'ws://' + document.location.hostname + ':8082/';
@@ -30,17 +30,29 @@
             </div>
             <p class="key-pressed" id="keyPressed"></p>
         </div>
-    </div>
-
-    <div class="cote-droit">
         <div class="speed-container">
             <h2>Vitesse</h2>
             <div class="row">
-                <div class="key" id="key1">K</div>
-                <div class="key" id="key2">L</div>
-                <div class="key" id="key3">M</div>
+                <div class="key" id="key1">1</div>
+                <div class="key" id="key2">2</div>
+                <div class="key" id="key3">3</div>
             </div>
             <p class="vitesse-pressed" id="vitessePressed"></p>
+        </div>
+
+    </div>
+
+    <div class="cote-droit">
+        <div class="camera-container">
+            <h2>Camera</h2>
+            <div class="row">
+                <div class="key" id="keyP">+--</div>
+                <div class="key" id="keyI">--+</div>
+            </div>
+            <p class="vitesse-pressed" id="vitessePressed"></p>
+        </div>
+        <div class="map-container">
+            <h2>Map</h2>
         </div>
     </div>
 

@@ -2,6 +2,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 
 .video-canvas {
@@ -19,16 +23,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 40%;
-}
-
-.cote-droit {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
+    text-align: center;
+    justify-content: flex-start;
+    width: 20%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .container,
@@ -41,9 +41,47 @@ body {
     opacity: 0.7;
 }
 
+.cote-droit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start;
+    width: 20%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.camera-container,
+.map-container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    opacity: 0.7;
+    margin-bottom: 20px;
+    /* Ajoutez un espacement entre les deux conteneurs */
+}
 
 .container {
-    margin-right: 20px;
+    transform: translate(10%, 50%);
+}
+
+.speed-container {
+    transform: translate(10%, 150%);
+}
+
+.camera-container {
+    transform: translate(10%, 50%);
+}
+
+.map-container {
+    transform: translate(0%, 250%);
 }
 
 .container h1 {
@@ -77,6 +115,13 @@ body {
 }
 
 .key-pressed {
+    background-color: #4CAF50;
+    /* Couleur de fond pour les touches enfoncées */
+    color: #fff;
+    /* Couleur du texte pour les touches enfoncées */
+}
+
+.vitesse-pressed {
     background-color: #4CAF50;
     /* Couleur de fond pour les touches enfoncées */
     color: #fff;

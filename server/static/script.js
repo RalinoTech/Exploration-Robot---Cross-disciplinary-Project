@@ -32,7 +32,7 @@ function sendPressedKeys() {
 setInterval(sendPressedKeys, 100);
 
 
-const speedKeys = ['k', 'l', 'm'];
+const speedKeys = ['1', '2', '3'];
 let activeSpeed = null;
 
 document.addEventListener('keydown', function (event) {
