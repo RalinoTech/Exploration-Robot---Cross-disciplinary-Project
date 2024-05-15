@@ -1,6 +1,6 @@
 // Gestion des touches Q, S, D et Z
-const arrowKeys = ['q', 's', 'd', 'z'];
-let arrowPressedKeys = []; // Liste des touches Q, S, D et Z actuellement enfoncées
+const arrowKeys = ['q', 's', 'd', 'z', 'm', 'k'];
+let arrowPressedKeys = [];
 
 document.addEventListener('keydown', function (event) {
     const key = event.key.toLowerCase();

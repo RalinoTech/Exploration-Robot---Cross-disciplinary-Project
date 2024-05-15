@@ -20,7 +20,7 @@ class Server:
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server.bind((ip, port))
 
-        self.keymap = "zqsde123"
+        self.keymap = "zqsdkme123"
 
     def connect(self):
 
