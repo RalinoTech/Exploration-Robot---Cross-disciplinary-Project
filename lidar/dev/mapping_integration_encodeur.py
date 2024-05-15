@@ -63,8 +63,10 @@ def process_data(data,dist_encodeur1,dist_encodeur2):
             #stockage des retours lidar dans la matrice matrice_stockage
             #print("Valeur des encodeurs: ",dist_encodeur1," ",dist_encodeur2)
 
-            #
             matrice_stockage[round(x)+5000 + dist_encodeur1][round(y)+5000+dist_encodeur2]=1
+
+            #matrice_stockage[round(x) + dist_encodeur1][round(y)+dist_encodeur2]=1
+            
             #................................................................
             plt.xlabel('<- arrière du robot            &            avant du robot ->')
             plt.ylabel('Plan détection LIDAR')
@@ -131,14 +133,14 @@ try:
     # conversion distance -> mm
     # dist_encodeur1 = int(infos_encodeur1 * 0.020)
     # dist_encodeur2 = int(infos_encodeur2 * 0.020)
-    dist_encodeur1=1000
-    dist_encodeur2=1000
+    # dist_encodeur1=1000
+    # dist_encodeur2=1000
 
     recup_matrice_lidar()
     process_data(scan_data,dist_encodeur1,dist_encodeur2)
 
     #on affiche le mapping obtenu
-    #affichage_mapping(scan_data)
+    affichage_mapping(scan_data)
 
    
 except KeyboardInterrupt:
