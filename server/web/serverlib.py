@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import socket
+import struct
 
 """
     Magic headers:
@@ -19,7 +20,7 @@ class Server:
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server.bind((ip, port))
 
-        self.keymap = "zqsde"
+        self.keymap = "zqsde123"
 
     def connect(self):
 
@@ -43,9 +44,18 @@ class Server:
         hdr = self.conn.recv(4).decode("utf-8")
 
         if hdr == "DATA":
+            mat_points = []
             data_size = int.from_bytes(self.conn.recv(4), 'little')
-            data = self.conn.recv(data_size)
-            return data
+            num_floats = data_size // 4  # Assuming each float is 4 bytes
+
+            for _ in range(num_floats):
+                float_bytes = self.conn.recv(4)
+                float_value = struct.unpack('f', float_bytes)[0]
+                mat_points.append(float_value)
+
+            return mat_points
+
+
             
 if __name__ == "__main__":
     print("[x] This code is a module!")
