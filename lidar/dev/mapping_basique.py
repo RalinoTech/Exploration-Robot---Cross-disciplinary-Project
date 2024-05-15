@@ -51,7 +51,6 @@ def process_data(data,x_translation,y_translation):
             #np.savetxt('matrice.txt', matrice_stockage, delimiter=' ', fmt='%d')
             #print("salut")
 
-
     plt.draw()
     plt.pause(3)
     print("Fin du graphique")
