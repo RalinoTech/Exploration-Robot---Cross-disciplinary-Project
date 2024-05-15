@@ -14,17 +14,16 @@ def lidar_rnp(server):
         if recv != None:
             lidar_data = recv
 
-
-@app.route('/input', methods=['GET'])
+@app.route('/api/input', methods=['GET'])
 def handle_input():
     inp = request.args.get('inp')
     server.send_input(inp)
-    return 'confirmation'
+    return jsonify({"status": "OK"}), 200
 
-@app.route("/lidar", methods=["GET"])
+@app.route("/api/lidar", methods=["GET"])
 def recv_lidar_data():
     global lidar_data
-    return jsonify(lidar_data)
+    return jsonify({"status": "OK", "data":lidar_data}), 200
 
 @app.route('/')
 def index():
