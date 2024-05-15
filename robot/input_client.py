@@ -3,6 +3,8 @@
 import socket
 import serial
 import time
+import os
+import signal
 import argparse
 from clientlib import Client
 from CourseLidarlib import CourseLidar
@@ -20,33 +22,34 @@ def main(ip, port, device):
     threadlid = threading.Thread(target=recup_data, args=(client,))
     threadlid.start()
 
-    try:
-        # Test sending a matrix
-        course = CourseLidar()
-        course.start_scanning()
+    
+    # Test sending a matrix
+    course = CourseLidar()
+    course.start_scanning()
 
-        # Sending the JSON string to the server
-        order = None
-
-        """
-            z: forward
-            s: backward
-            d: right
-            q: left
-            e: exit
-        """
-        time.sleep(5)
-
-        # Main loop for sending Lidar data
-        while True:
-            mat = course.get_last_scan_data()
-            client.send_to_computer(mat)
-            print(mat)
-            time.sleep(2)
-    except KeyboardInterrupt:
+    def lidar_exit(s,f):
         course.stop_scanning()
-        print("Fin de lidar")
-        
+        os._exit(0)
+
+    signal.signal(signal.SIGINT, lidar_exit)
+
+    # Sending the JSON string to the server
+   
+
+    """
+        z: forward
+        s: backward
+        d: right
+        q: left
+        e: exit
+    """
+    time.sleep(5)
+
+    # Main loop for sending Lidar data
+    while True:
+        mat = course.get_last_scan_data()
+        client.send_to_computer(mat)
+        time.sleep(2)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -56,4 +59,4 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--serial-device", default="/dev/serial0", help="Target UART device")
 
     args = parser.parse_args()
-    main(*vars(args).values())
+main(*vars(args).values())

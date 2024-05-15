@@ -44,7 +44,9 @@ class Client:
         self.client.send(b"DATA")
 
         # Pack the floats into binary data
+        print(data)
         data_bytes = struct.pack(f"{len(data)}f", *data)
+        assert(len(data_bytes) % 4 == 0)
 
         # Send the length of the data
         length_bytes_struct = struct.pack('I', len(data_bytes))
