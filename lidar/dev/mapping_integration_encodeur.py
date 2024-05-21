@@ -52,8 +52,8 @@ def process_data(data,dist_encodeur1,dist_encodeur2):
     for angle, distance in enumerate(data):
         if distance != -1:
             # Convert polar coordinates to Cartesian coordinates
-            x = distance * cos(radians(angle))+dist_encodeur1
-            y = distance * sin(radians(angle))+dist_encodeur2
+            y = distance * cos(radians(angle))+dist_encodeur1
+            x = distance * sin(radians(angle))+dist_encodeur2
 
             #gestion de la position du robot pour le lidar
             # x=x+x_translation
@@ -63,13 +63,13 @@ def process_data(data,dist_encodeur1,dist_encodeur2):
             #stockage des retours lidar dans la matrice matrice_stockage
             #print("Valeur des encodeurs: ",dist_encodeur1," ",dist_encodeur2)
 
-            matrice_stockage[round(x)+5000 + dist_encodeur1][round(y)+5000+dist_encodeur2]=1
+            matrice_stockage[round(x) +5000 + dist_encodeur1][round(y)+ 5000 +dist_encodeur2]=1
 
             #matrice_stockage[round(x) + dist_encodeur1][round(y)+dist_encodeur2]=1
             
             #................................................................
-            plt.xlabel('<- arrière du robot            &            avant du robot ->')
-            plt.ylabel('Plan détection LIDAR')
+            plt.ylabel('<- arrière du robot            &            avant du robot ->')
+            plt.xlabel('Plan détection LIDAR')
             ax.plot(x, y, 'bo', markersize=1)  # Plot each point
 
             #affichage de la matrice de stockage
@@ -86,8 +86,8 @@ def process_data(data,dist_encodeur1,dist_encodeur2):
 def affichage_mapping(data):
 
     ax.clear()  # Clear the previous plot
-    ax.set_xlim(-max_distance, max_distance)
-    ax.set_ylim(-max_distance, max_distance)
+    ax.set_xlim(0, 8000)
+    ax.set_ylim(0, 8000)
     ax.set_aspect('equal', adjustable='box')  # Set aspect ratio to equal for correct scaling
 
     #on affiche les données stockées dans la matrice matrice_stockage
@@ -95,9 +95,12 @@ def affichage_mapping(data):
     for ligne in range(nb_ligne_matrice):
         for colonne in range(nb_colonne_matrice):
             #condition
-            if (matrice_stockage[ligne,colonne] == 1):
-                print("Obstacle")
+            if (matrice_stockage[ligne][colonne] == 1):
+                print("Obstacle détécté dans la matrice",time.time()-tmp)
                 ax.plot(ligne, colonne, 'bo', markersize=1)    
+
+    plt.gca(); ax.text(5000, 5000, '▲',color = 'red') #♣
+
     plt.draw()
     plt.pause(50)
     print("Fin du graphique")
@@ -122,7 +125,7 @@ def recup_matrice_lidar():
 
 #............................................................................. 
 try:
-
+    tmp= time.time()
     #on recupere la matrice du lidar
     recup_matrice_lidar()
     print("je suis sortis du scan")
@@ -135,6 +138,7 @@ try:
     # dist_encodeur2 = int(infos_encodeur2 * 0.020)
     # dist_encodeur1=1000
     # dist_encodeur2=1000
+    temps=time.tzset()
 
     recup_matrice_lidar()
     process_data(scan_data,dist_encodeur1,dist_encodeur2)
