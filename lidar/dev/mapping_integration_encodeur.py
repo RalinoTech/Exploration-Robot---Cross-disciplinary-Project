@@ -125,6 +125,8 @@ def recup_matrice_lidar():
 
 #............................................................................. 
 try:
+    #on récupère les données des codeurs + on active le balayage lidar si distance activé
+
     tmp= time.time()
     #on recupere la matrice du lidar
     recup_matrice_lidar()
@@ -133,11 +135,9 @@ try:
     process_data(scan_data,dist_encodeur1,dist_encodeur2)
 
     #on translate les données avec les encodeurs 
-    # conversion distance -> mm
-    # dist_encodeur1 = int(infos_encodeur1 * 0.020)
-    # dist_encodeur2 = int(infos_encodeur2 * 0.020)
-    # dist_encodeur1=1000
-    # dist_encodeur2=1000
+    # conversion incrément -> m
+    # dist_encodeur1 = int(infos_encodeur1 * 1.14*(10)**(-5))
+    # dist_encodeur2 = int(infos_encodeur2 * 1.14*(10)**(-5))
     temps=time.tzset()
 
     recup_matrice_lidar()
