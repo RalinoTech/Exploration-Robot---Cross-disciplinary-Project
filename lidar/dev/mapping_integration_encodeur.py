@@ -63,7 +63,7 @@ def process_data(data,dist_encodeur1,dist_encodeur2):
             #stockage des retours lidar dans la matrice matrice_stockage
             #print("Valeur des encodeurs: ",dist_encodeur1," ",dist_encodeur2)
 
-            matrice_stockage[round(x) +5000 + dist_encodeur1][round(y)+ 5000 +dist_encodeur2]=1
+            matrice_stockage[round(x) +5000][round(y)+ 5000]=1
 
             #matrice_stockage[round(x) + dist_encodeur1][round(y)+dist_encodeur2]=1
             
@@ -86,8 +86,8 @@ def process_data(data,dist_encodeur1,dist_encodeur2):
 def affichage_mapping(data):
 
     ax.clear()  # Clear the previous plot
-    ax.set_xlim(0, 8000)
-    ax.set_ylim(0, 8000)
+    ax.set_xlim(-max_distance, max_distance)
+    ax.set_ylim(-max_distance, max_distance)
     ax.set_aspect('equal', adjustable='box')  # Set aspect ratio to equal for correct scaling
 
     #on affiche les données stockées dans la matrice matrice_stockage
@@ -141,6 +141,9 @@ try:
     temps=time.tzset()
 
     recup_matrice_lidar()
+    #dist_encodeur1 = -3000
+    dist_encodeur1 = -3000
+    dist_encodeur2 = 0
     process_data(scan_data,dist_encodeur1,dist_encodeur2)
 
     #on affiche le mapping obtenu
