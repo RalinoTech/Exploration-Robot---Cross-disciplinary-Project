@@ -10,6 +10,7 @@ import struct
         'DATA' : Lidar data
             - Data size (4 bytes)
             - Data (size)
+            
         ...
 """
 
@@ -20,7 +21,7 @@ class Server:
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server.bind((ip, port))
 
-        self.keymap = "zqsdkme123"
+        self.keymap = "zqsde"
 
     def connect(self):
 
@@ -41,24 +42,17 @@ class Server:
         self.conn.close()
 
     def rnp(self):
-        hdr = self.conn.recv(4)
-        if hdr == b"DATA":
+        hdr = self.conn.recv(4).decode("utf-8")
+
+        if hdr == "DATA":
             mat_points = []
             data_size = int.from_bytes(self.conn.recv(4), 'little')
+            num_floats = data_size // 4  # Assuming each float is 4 bytes
 
-            data = b""
-            while len(data) != data_size:
-                recvd = self.conn.recv(4)
-                if recvd == b"": break
-                data += recvd
-
-            assert(len(data) == data_size)
-
-            for i in range(0, len(data), 4):
-                float_bytes = data[i:i+4]
-                float_value, = struct.unpack('f', float_bytes)
+            for _ in range(num_floats):
+                float_bytes = self.conn.recv(4)
+                float_value = struct.unpack('f', float_bytes)[0]
                 mat_points.append(float_value)
-                
 
             return mat_points
 
