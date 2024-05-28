@@ -31,7 +31,6 @@ function sendPressedKeys() {
 // Envoie les touches enfoncées toutes les 100 millisecondes
 setInterval(sendPressedKeys, 100);
 
-
 const speedKeys = ['1', '2', '3'];
 let activeSpeed = null;
 
@@ -59,3 +58,15 @@ function sendData(key) {
     xhr.open('GET', url, true);
     xhr.send();
 }
+
+// Fonction pour mettre à jour le plot LIDAR
+function updatePlot() {
+    console.log("Updating plot");  // Log to ensure function is called
+    var lidarPlot = document.getElementById('lidar-plot');
+    var newSrc = '/plot.png?' + new Date().getTime();
+    lidarPlot.src = newSrc;
+    console.log("Plot updated:", lidarPlot.src);  // Log the new src URL
+}
+
+// Met à jour le plot LIDAR toutes les secondes
+setInterval(updatePlot, 1000);
