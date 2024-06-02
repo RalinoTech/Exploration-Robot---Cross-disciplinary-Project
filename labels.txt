@@ -1,0 +1,3 @@
+0 Ennemi
+1 Gentil
+2 Arme Seule
