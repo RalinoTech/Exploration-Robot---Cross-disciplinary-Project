@@ -1,3 +1,5 @@
+#Affichage simple de la matrice de point du LIDAR
+
 import os
 from math import floor
 from adafruit_rplidar import RPLidar

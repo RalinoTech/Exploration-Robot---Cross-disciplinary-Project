@@ -1,3 +1,5 @@
+#Librairie pour afficher la matrice de point du LIDAR 1 fois avec un delay
+
 from math import cos, sin, radians
 import matplotlib.pyplot as plt
 import numpy as np

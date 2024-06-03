@@ -1,3 +1,5 @@
+#Code pour afficher un mapping AVEC l'intégration des encodeurs
+
 #bibliothèques
 from math import cos, sin, radians,floor
 import matplotlib.pyplot as plt

@@ -1,3 +1,5 @@
+#Code pour afficher la matrice de point du LIDAR en temps réel + conditions obstacles
+
 import os
 from math import cos, sin, radians
 import matplotlib.pyplot as plt
