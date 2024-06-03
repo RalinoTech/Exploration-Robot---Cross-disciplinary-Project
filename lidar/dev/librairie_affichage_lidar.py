@@ -34,7 +34,7 @@ def process_data(data):
             ax.plot(x, y, 'bo', markersize=1)  # Plot each point
 
     plt.draw()
-    plt.pause(3)
+    plt.pause(10)
   
 
 try:
